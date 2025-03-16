@@ -297,6 +297,7 @@ void Administracion::imprimirPropietariosSinCuarto() {
     }
 }
 
+
 void Administracion::imprimirPropietariosCuartoUtil(bool isTerminado) {
     for (auto &propietario: propietarios) {
         if (propietario->getPropiedad() != nullptr) {
