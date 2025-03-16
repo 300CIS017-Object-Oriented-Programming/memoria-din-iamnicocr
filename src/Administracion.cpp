@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Administracion.h"
-
+#include "Propietario.h"
 
 Administracion::Administracion() {
     cout << "Entre al constructor de administracion \n";
@@ -297,6 +297,7 @@ void Administracion::imprimirPropietariosSinCuarto() {
     }
 }
 
+
 void Administracion::imprimirPropietariosCuartoUtil(bool isTerminado) {
     for (auto &propietario: propietarios) {
         if (propietario->getPropiedad() != nullptr) {
@@ -307,3 +308,27 @@ void Administracion::imprimirPropietariosCuartoUtil(bool isTerminado) {
         }
     }
 }
+
+void Administracion::generarReportePropiedades() {
+    float totalRecaudado = 0.0;
+
+    for (Propietario* propietario : propietarios) {
+        cout << "Propietario: " << propietario->getNombre() << ", ID: " << propietario->getIdentificacion() << endl;
+
+        Propiedad* propiedad = propietario->getPropiedad();
+        if (propiedad) {
+            cout << "  - Propiedad ID: " << propiedad->getNumIdentificacion() << ", Piso: " << propiedad->getPiso() << ", Área: " << propiedad->getAreaPropiedad() << "m²" << endl;
+            cout << "  - Tiene parqueadero: " << (propiedad->isHayParqueadero() ? "Sí" : "No") << endl;
+            cout << "  - Cuarto útil: ";
+                if (propietario->getPropiedad()->getCuartoUtil() != nullptr &&
+                propietario->getPropiedad()->getCuartoUtil()->isEstaTerminado() == true) {
+                cout << "Terminado\n";
+                }else if (propietario->getPropiedad()->getCuartoUtil() != nullptr){cout << "No terminado\n";}else{cout<<"No tiene\n";}
+            totalRecaudado += propiedad->getAreaPropiedad() * 5000;
+        }
+        cout << "-------------------------------" << endl;
+    }
+    cout << "Total administración recaudada: " << totalRecaudado << endl;
+}
+
+

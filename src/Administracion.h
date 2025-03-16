@@ -45,6 +45,10 @@ public:
     void agregarPropietario();
 
     void relacionarPropietarioPropiedad();
+
+    void generarReportePropiedades();
+
 };
+
 
 #endif
